@@ -44,6 +44,7 @@ Contiene la abstracción de persistencia y sus implementaciones:
 - `BaseStorage`: contrato común
 - `TXTStorage`: almacenamiento en archivos `.txt`
 - `JSONStorage`: almacenamiento en archivo `.json`
+- `PickleStorage`: almacenamiento en archivo `.json`
 
 ### data/
 Carpeta donde se almacenan los archivos generados por el programa durante la ejecución.
@@ -74,11 +75,12 @@ python main.py
 
 ## Funcionamiento general
 
-Al iniciar el programa, se solicita seleccionar el tipo de almacenamiento:
+Al iniciar el programa, se solicita seleccionar el tipo de almacenamiento o salir del programa:
 
 - `1`: Archivos de texto
 - `2`: JSON
-
+- `3`: Pickle
+- `4`: Salir
 Luego se muestra un menú con las operaciones disponibles:
 
 - crear nota
@@ -87,7 +89,7 @@ Luego se muestra un menú con las operaciones disponibles:
 - buscar palabra
 - editar nota
 - eliminar nota
-- salir
+- volver a seleccionar almacenamiento
 
 ## Control de cambios
 
