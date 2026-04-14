@@ -24,6 +24,7 @@ gestor_notas_mvc/
 |   |-- base_storage.py
 |   |-- txt_storage.py
 |   `-- json_storage.py
+    `-- pickle_storage.py
 `-- data/
 ```
 
