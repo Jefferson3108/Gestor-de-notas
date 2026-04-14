@@ -1,3 +1,8 @@
+from storage.json_storage import JSONStorage
+from storage.pickle_storage import PickleStorage
+from storage.txt_storage import TXTStorage
+
+
 class NotaView:
     """Gestiona la interacción por consola con el usuario."""
 
@@ -10,8 +15,20 @@ class NotaView:
         print("4. Buscar palabra")
         print("5. Editar nota")
         print("6. Eliminar nota")
-        print("7. Salir")
-
+        print("7. Volver a seleccionar almacenamiento ")
+    
+    def seleccionar_storage(self):
+     """Permite seleccionar el tipo de almacenamiento."""
+     print("Seleccione el tipo de almacenamiento:")
+     print("1. Archivos de texto")
+     print("2. JSON")
+     print("3. Pickle")
+     print("4. Salir")
+     
+    def solicitar_opcion_almacenamiento(self):
+        """Solicita una opción de almacenamiento al usuario."""
+        return input("Seleccione una opción: ").strip()
+    
     def solicitar_opcion(self):
         """Solicita una opción al usuario."""
         return input("Seleccione una opción: ").strip()

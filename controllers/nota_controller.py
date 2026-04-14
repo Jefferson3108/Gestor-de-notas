@@ -1,4 +1,7 @@
 from models.nota import Nota
+from storage.json_storage import JSONStorage
+from storage.pickle_storage import PickleStorage
+from storage.txt_storage import TXTStorage
 
 
 class NotaController:
@@ -9,7 +12,8 @@ class NotaController:
         self.view = view
 
     def ejecutar(self):
-        """Ejecuta el ciclo principal del programa."""
+        self.ejecutar_opciones_storage()
+
         while True:
             self.view.mostrar_menu()
             opcion = self.view.solicitar_opcion()
@@ -33,13 +37,41 @@ class NotaController:
                 self.eliminar_nota()
 
             elif opcion == "7":
-                self.view.mostrar_mensaje("Programa finalizado.")
+                self.ejecutar_opciones_storage()
+            else:
+                self.view.mostrar_mensaje("Opción no válida.")
+
+    def ejecutar_opciones_storage(self):
+        while True:
+            self.view.seleccionar_storage()
+            opcion = self.view.solicitar_opcion_almacenamiento()
+
+            if opcion == "1":
+                self.storage = TXTStorage()
+                self.view.mostrar_mensaje(
+                    "Almacenamiento TXT seleccionado."
+                )
                 break
 
-            else:
+            elif opcion == "2":
+                self.storage = JSONStorage()
                 self.view.mostrar_mensaje(
-                    "Opción no válida. Intente nuevamente."
+                    "Almacenamiento JSON seleccionado."
                 )
+                break
+
+            elif opcion == "3":
+                self.storage = PickleStorage()
+                self.view.mostrar_mensaje(
+                    "Almacenamiento Pickle seleccionado."
+                )
+                break
+            elif opcion == "4":
+                self.view.mostrar_mensaje("Saliendo del programa.")
+                exit()
+
+            else:
+                self.view.mostrar_mensaje("Opción no válida.")
 
     def crear_nota(self):
         """Crea una nueva nota."""
@@ -119,7 +151,9 @@ class NotaController:
         try:
             if self.view.confirmar_eliminacion():
                 self.storage.eliminar_nota(nombre)
-                self.view.mostrar_mensaje("Nota eliminada correctamente.")
+                self.view.mostrar_mensaje(
+                    "Nota eliminada correctamente."
+                )
             else:
                 self.view.mostrar_mensaje("Operación cancelada.")
         except FileNotFoundError as error:
